@@ -1,0 +1,105 @@
+check                                             danger  warning   min mm
+F.Cu    trace-trace      DIFFERENT nets                0       38    0.129
+F.Cu    pad/via-trace    DIFFERENT nets                0       18    0.106
+F.Cu    pad/via-pad/via  DIFFERENT nets                0        1    0.130
+F.Cu    pad/via-pad/via  same net                      0        0        -
+B.Cu    trace-trace      DIFFERENT nets                0        3    0.129
+B.Cu    pad/via-trace    DIFFERENT nets                0       11    0.100
+B.Cu    pad/via-pad/via  DIFFERENT nets                0        0        -
+B.Cu    pad/via-pad/via  same net                      0        0        -
+In1.Cu  trace-trace      DIFFERENT nets                0        0        -
+In1.Cu  pad/via-trace    DIFFERENT nets                0        0        -
+In1.Cu  pad/via-pad/via  DIFFERENT nets                0        0        -
+In1.Cu  pad/via-pad/via  same net                      0        0        -
+In2.Cu  trace-trace      DIFFERENT nets                0        9    0.129
+In2.Cu  pad/via-trace    DIFFERENT nets                0        0        -
+In2.Cu  pad/via-pad/via  DIFFERENT nets                0        0        -
+In2.Cu  pad/via-pad/via  same net                      0        0        -
+annular ring (vias)                                    0       61    0.125
+F silkscreen to pad                                    0        0        -
+F silkscreen to hole                                   0        0        -
+F silkscreen line width                                0        0    0.160
+B silkscreen to pad                                    0        0        -
+B silkscreen to hole                                   0        0        -
+B silkscreen line width                                0        0    0.160
+
+F.Cu trace-trace DIFF gap 0.129: track SDC_D1 (15.37,15.63)-(14.91,15.63)  |  track SDC_D2 (15.98,15.35)-(15.04,15.35)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D1 (15.37,15.63)-(14.91,15.63)  |  track SDC_D2 (15.04,15.35)-(14.38,14.70)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D1 (15.54,15.80)-(15.37,15.63)  |  track SDC_D2 (15.98,15.35)-(15.04,15.35)
+F.Cu trace-trace DIFF gap 0.129: track I2C0_SDA (24.79,8.69)-(9.09,8.69)  |  track I2C0_SCL (9.31,8.41)-(38.99,8.41)
+F.Cu trace-trace DIFF gap 0.129: track UART1_CTS (13.47,12.64)-(13.47,18.25)  |  track SDC_D0 (13.75,12.87)-(15.16,11.46)
+F.Cu trace-trace DIFF gap 0.129: track UART1_CTS (13.47,12.64)-(13.47,18.25)  |  track SDC_D0 (13.75,14.91)-(13.75,12.87)
+F.Cu trace-trace DIFF gap 0.129: track UART1_CTS (13.47,12.64)-(13.47,18.25)  |  track SDC_D0 (14.75,15.91)-(13.75,14.91)
+F.Cu trace-trace DIFF gap 0.129: track I2C0_SDA (26.73,10.64)-(24.79,8.69)  |  track I2C0_SCL (9.31,8.41)-(38.99,8.41)
+F.Cu trace-trace DIFF gap 0.129: track I2C0_SDA (24.79,8.69)-(9.09,8.69)  |  track I2C0_SCL (6.88,5.98)-(9.31,8.41)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D0 (15.25,15.91)-(14.75,15.91)  |  track SDC_D1 (14.91,15.63)-(14.06,14.78)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D0 (15.25,15.91)-(14.75,15.91)  |  track SDC_D1 (15.37,15.63)-(14.91,15.63)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D0 (15.54,16.20)-(15.25,15.91)  |  track SDC_D1 (15.37,15.63)-(14.91,15.63)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D0 (15.54,16.20)-(15.25,15.91)  |  track SDC_D1 (16.58,15.80)-(15.54,15.80)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D0 (15.54,16.20)-(15.25,15.91)  |  track SDC_D1 (15.54,15.80)-(15.37,15.63)
+F.Cu trace-trace DIFF gap 0.129: track SDC_D0 (15.25,15.91)-(14.75,15.91)  |  track SDC_D1 (15.54,15.80)-(15.37,15.63)
+F.Cu trace-trace DIFF gap 0.129: track UART2_TX (43.88,8.06)-(52.88,17.06)  |  track LED_STATUS (43.72,7.51)-(47.54,11.32)
+F.Cu trace-trace DIFF gap 0.129: track UART2_TX (30.19,8.06)-(43.88,8.06)  |  track LED_STATUS (43.72,7.51)-(47.54,11.32)
+F.Cu trace-trace DIFF gap 0.129: track UART2_TX (43.88,8.06)-(52.88,17.06)  |  track LED_STATUS (47.54,11.32)-(55.52,11.32)
+F.Cu trace-trace DIFF gap 0.131: track I2C0_SDA (20.28,19.34)-(20.96,19.34)  |  track I2C0_SCL (21.32,19.06)-(20.27,19.06)
+F.Cu trace-trace DIFF gap 0.131: track I2C0_SDA (20.96,19.34)-(21.31,19.69)  |  track I2C0_SCL (21.32,19.06)-(20.27,19.06)
+F.Cu trace-trace DIFF gap 0.131: track I2C0_SDA (20.21,19.40)-(20.28,19.34)  |  track I2C0_SCL (21.32,19.06)-(20.27,19.06)
+F.Cu trace-trace DIFF gap 0.131: track I2C0_SDA (20.21,19.40)-(20.28,19.34)  |  track I2C0_SCL (20.27,19.06)-(20.21,19.00)
+F.Cu trace-trace DIFF gap 0.131: track I2C0_SDA (20.28,19.34)-(20.96,19.34)  |  track I2C0_SCL (20.27,19.06)-(20.21,19.00)
+F.Cu trace-trace DIFF gap 0.138: track SDC_D1 (14.91,15.63)-(14.06,14.78)  |  track SDC_D2 (15.04,15.35)-(14.38,14.70)
+F.Cu trace-trace DIFF gap 0.138: track SDC_D1 (14.91,15.63)-(14.06,14.78)  |  track SDC_D2 (15.98,15.35)-(15.04,15.35)
+F.Cu trace-trace DIFF gap 0.138: track SDC_D1 (14.91,15.63)-(14.06,14.78)  |  track SDC_D2 (14.38,14.70)-(14.38,13.93)
+F.Cu trace-trace DIFF gap 0.141: track UART1_RTS (13.20,18.40)-(13.20,18.35)  |  track UART1_CTS (13.47,12.64)-(13.47,18.25)
+F.Cu trace-trace DIFF gap 0.141: track UART1_RTS (13.20,18.40)-(13.20,18.35)  |  track UART1_CTS (13.47,18.25)-(15.52,20.29)
+F.Cu trace-trace DIFF gap 0.141: track UART1_RTS (13.20,18.35)-(13.15,18.30)  |  track UART1_CTS (13.47,12.64)-(13.47,18.25)
+F.Cu trace-trace DIFF gap 0.141: track UART1_RTS (13.20,18.35)-(13.15,18.30)  |  track UART1_CTS (13.47,18.25)-(15.52,20.29)
+F.Cu trace-trace DIFF gap 0.142: track UART1_RX (12.05,13.70)-(11.95,13.60)  |  track UART1_RTS (13.15,14.40)-(12.30,13.55)
+F.Cu trace-trace DIFF gap 0.142: track UART1_RX (12.05,13.70)-(11.95,13.60)  |  track UART1_RTS (12.30,13.55)-(12.30,13.50)
+F.Cu trace-trace DIFF gap 0.142: track UART1_RX (12.05,13.75)-(12.05,13.70)  |  track UART1_RTS (13.15,14.40)-(12.30,13.55)
+F.Cu trace-trace DIFF gap 0.142: track UART1_RX (12.05,13.75)-(12.05,13.70)  |  track UART1_RTS (12.30,13.55)-(12.30,13.50)
+F.Cu trace-trace DIFF gap 0.144: track IMU_INT (56.56,21.94)-(59.06,21.94)  |  track LED_STATUS (59.21,22.20)-(59.21,22.42)
+F.Cu trace-trace DIFF gap 0.144: track IMU_INT (56.56,21.94)-(59.06,21.94)  |  track LED_STATUS (59.76,22.20)-(59.21,22.20)
+F.Cu trace-trace DIFF gap 0.144: track IMU_INT (59.06,21.94)-(59.21,21.80)  |  track LED_STATUS (59.21,22.20)-(59.21,22.42)
+F.Cu trace-trace DIFF gap 0.144: track IMU_INT (59.06,21.94)-(59.21,21.80)  |  track LED_STATUS (59.76,22.20)-(59.21,22.20)
+F.Cu pad/via-trace DIFF gap 0.106: U3-12 IMU_CS (34.50,19.09)  |  track SPI1_SCK (34.00,18.84)-(34.32,18.53)
+F.Cu pad/via-trace DIFF gap 0.114: U3-11  (35.16,19.25)  |  track IMU_CS (35.54,18.87)-(35.96,19.29)
+F.Cu pad/via-trace DIFF gap 0.117: J4-4 I2C0_SCL (6.88,5.05)  |  track I2C0_SDA (9.09,8.69)-(5.62,5.22)
+F.Cu pad/via-trace DIFF gap 0.129: J1-79  (16.58,12.20)  |  track SWCLK (16.03,12.60)-(16.03,12.00)
+F.Cu pad/via-trace DIFF gap 0.129: U5-7  (44.76,27.75)  |  track +3V3_SENS (46.10,28.18)-(44.41,28.18)
+F.Cu pad/via-trace DIFF gap 0.129: J1-59 SDC_D0 (16.58,16.20)  |  track SDC_CMD (15.20,16.50)-(16.48,16.50)
+F.Cu pad/via-trace DIFF gap 0.129: J1-59 SDC_D0 (16.58,16.20)  |  track SDC_CMD (16.48,16.50)-(16.58,16.60)
+F.Cu pad/via-trace DIFF gap 0.129: TP3-1 LED_STRIP (57.00,35.00)  |  track BUZZ_N (56.00,35.99)-(56.00,34.14)
+F.Cu pad/via-trace DIFF gap 0.129: U3-11  (35.16,19.25)  |  track IMU_CS (34.72,18.87)-(35.54,18.87)
+F.Cu pad/via-trace DIFF gap 0.130: C15-2 GND (41.20,26.52)  |  track I2C0_SCL (40.82,26.02)-(39.88,26.96)
+F.Cu pad/via-trace DIFF gap 0.135: J6-2 UART2_RX (28.62,5.05)  |  track UART2_TX (27.38,5.25)-(30.19,8.06)
+F.Cu pad/via-trace DIFF gap 0.137: C11-2 GND (31.08,19.20)  |  track +3V3_SENS (32.32,17.00)-(30.12,19.20)
+F.Cu pad/via-trace DIFF gap 0.138: J1-79  (16.58,12.20)  |  track SWCLK (16.03,12.00)-(16.59,11.44)
+F.Cu pad/via-trace DIFF gap 0.138: J7-1 +5V (41.88,5.05)  |  track UART3_TX (41.98,6.60)-(40.62,5.25)
+F.Cu pad/via-trace DIFF gap 0.144: J2-65  (62.84,25.00)  |  track M4 (64.55,25.95)-(63.25,24.65)
+F.Cu pad/via-trace DIFF gap 0.145: C15-2 GND (41.20,26.52)  |  track I2C0_SCL (42.62,26.02)-(40.82,26.02)
+F.Cu pad/via-trace DIFF gap 0.145: J2-54  (59.76,22.60)  |  track LED_STATUS (59.21,22.42)-(58.89,22.74)
+F.Cu pad/via-trace DIFF gap 0.145: J2-54  (59.76,22.60)  |  track LED_STATUS (59.21,22.20)-(59.21,22.42)
+F.Cu pad/via-pad/via DIFF gap 0.130: C13-1 +3V3_SENS (37.20,20.48)  |  via SPI1_COPI (36.66,21.03)
+B.Cu trace-trace DIFF gap 0.129: track SDC_D2 (54.62,24.93)-(56.36,23.19)  |  track SDC_D3 (57.16,22.00)-(54.98,24.18)
+B.Cu trace-trace DIFF gap 0.129: track SDC_D2 (56.36,23.19)-(63.61,23.19)  |  track SDC_D3 (57.16,22.00)-(54.98,24.18)
+B.Cu trace-trace DIFF gap 0.129: track SDC_D2 (54.62,24.93)-(56.36,23.19)  |  track SDC_D3 (54.98,24.18)-(40.72,24.18)
+B.Cu pad/via-trace DIFF gap 0.100: R3-2 GND (14.60,22.69)  |  track BUCK_FB (14.50,21.95)-(14.05,22.40)
+B.Cu pad/via-trace DIFF gap 0.103: U6-4 CAN1_RX (22.02,21.09)  |  track +3V3 (22.70,22.02)-(24.02,20.70)
+B.Cu pad/via-trace DIFF gap 0.106: R7-2 CAN_TERM (22.91,27.40)  |  track CANH (22.06,27.40)-(25.83,23.64)
+B.Cu pad/via-trace DIFF gap 0.129: C8-2 GND (10.35,32.60)  |  track +5V (8.45,32.60)-(9.35,33.50)
+B.Cu pad/via-trace DIFF gap 0.129: U1-4  (5.90,13.29)  |  track BUCK_EN (6.88,12.67)-(6.88,14.56)
+B.Cu pad/via-trace DIFF gap 0.129: J11-3 SDC_CMD (64.45,20.91)  |  track +3V3 (65.25,20.75)-(66.86,22.36)
+B.Cu pad/via-trace DIFF gap 0.129: J11-3 SDC_CMD (64.45,20.91)  |  track +3V3 (65.25,19.80)-(65.25,20.75)
+B.Cu pad/via-trace DIFF gap 0.134: J11-10 GND (54.60,25.74)  |  track SDC_D2 (43.01,24.93)-(54.62,24.93)
+B.Cu pad/via-trace DIFF gap 0.134: J11-10 GND (54.60,25.74)  |  track SDC_D2 (54.62,24.93)-(56.36,23.19)
+B.Cu pad/via-trace DIFF gap 0.136: U2-4  (25.64,12.05)  |  track SDC_D0 (53.65,11.54)-(24.83,11.54)
+B.Cu pad/via-trace DIFF gap 0.137: C10-2 GND (24.98,15.60)  |  track +3V3_SENS (24.02,15.60)-(25.28,14.34)
+In2.Cu trace-trace DIFF gap 0.129: track UART0_TX (20.87,14.28)-(13.41,6.83)  |  track UART0_RX (19.41,13.22)-(15.45,9.26)
+In2.Cu trace-trace DIFF gap 0.129: track UART0_TX (20.87,14.28)-(13.41,6.83)  |  track UART0_RX (19.41,19.50)-(19.41,13.22)
+In2.Cu trace-trace DIFF gap 0.129: track UART0_TX (20.87,14.28)-(13.41,6.83)  |  track UART0_RX (15.45,9.26)-(10.88,9.26)
+In2.Cu trace-trace DIFF gap 0.129: track UART1_TX (18.94,31.74)-(14.65,27.44)  |  track SDC_D3 (15.10,27.50)-(18.99,31.39)
+In2.Cu trace-trace DIFF gap 0.129: track UART1_TX (18.94,31.74)-(14.65,27.44)  |  track SDC_D3 (15.10,24.76)-(15.10,27.50)
+In2.Cu trace-trace DIFF gap 0.129: track UART1_TX (18.94,31.74)-(14.65,27.44)  |  track SDC_D3 (18.99,31.39)-(33.72,31.39)
+In2.Cu trace-trace DIFF gap 0.138: track NRST (13.90,30.00)-(13.90,13.32)  |  track SWDIO (14.19,13.46)-(14.19,27.66)
+In2.Cu trace-trace DIFF gap 0.138: track NRST (13.90,30.00)-(13.90,13.32)  |  track SWDIO (14.19,27.66)-(17.45,30.92)
+In2.Cu trace-trace DIFF gap 0.138: track NRST (13.90,30.00)-(13.90,13.32)  |  track SWDIO (15.14,12.51)-(14.19,13.46)

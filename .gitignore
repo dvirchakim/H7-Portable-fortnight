@@ -1,0 +1,17 @@
+# bundled tools (portable JRE + Freerouting, ~131 MB): download them yourself, see README "Routing"
+tools/
+# board snapshots taken before each edit pass (the current board is portenta_drone_fc.kicad_pcb)
+out/pre_*.kicad_pcb
+out/r03_*.kicad_pcb
+out/routed_v*.kicad_pcb
+out/u4_stage1.kicad_pcb
+# local / generated
+logs/
+__pycache__/
+*.pyc
+*.kicad_prl
+*-backups/
+fp-info-cache
+*.lck
+# vendor drawing (Hirose copyright): get it from hirose.com, product DF40HC(3.5)-80DS-0.4V(51)
+docs/DF40HC_3.5_80DS_drawing.pdf

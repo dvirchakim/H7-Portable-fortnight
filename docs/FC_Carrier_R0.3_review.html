@@ -1,0 +1,325 @@
+<title>FC Carrier R0.3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: one reading column (engineering review document), wide tables scroll inside their own frames.
+   Palette: solder-mask green neutrals with a single copper accent; semantic chips for fixed / verified / next rev. */
+:root {
+  --bg: #f6f8f6;
+  --paper: #ffffff;
+  --fg: #16201b;
+  --muted: #56655d;
+  --line: #d7dfda;
+  --soft: #edf2ef;
+  --accent: #a8561f;
+  --accent-soft: #f6e7dc;
+  --ok: #1f6b45;
+  --ok-soft: #e1f0e7;
+  --warn: #8a5a00;
+  --warn-soft: #f7ecd2;
+  --info: #24527a;
+  --info-soft: #e2ebf4;
+  --mask: #2f5d47;
+  --mask-soft: #dfe9e3;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-head: "IBM Plex Sans Condensed", "Arial Narrow", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1512; --paper: #151d19; --fg: #e4ebe7; --muted: #9db0a6; --line: #2b3832; --soft: #1b2621;
+    --accent: #e08a4c; --accent-soft: #3a2618; --ok: #6fcf98; --ok-soft: #173326; --warn: #e5b350; --warn-soft: #3a2e14;
+    --info: #8ab8e6; --info-soft: #182a3b; --mask: #8fcfae; --mask-soft: #1a2c23; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1512; --paper: #151d19; --fg: #e4ebe7; --muted: #9db0a6; --line: #2b3832; --soft: #1b2621;
+  --accent: #e08a4c; --accent-soft: #3a2618; --ok: #6fcf98; --ok-soft: #173326; --warn: #e5b350; --warn-soft: #3a2e14;
+  --info: #8ab8e6; --info-soft: #182a3b; --mask: #8fcfae; --mask-soft: #1a2c23; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.6 var(--font-body); margin: 0; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.doc { display: grid; gap: 18px; padding-bottom: 28px; border-bottom: 2px solid var(--fg); }
+.eyebrow { font: 600 12px/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 clamp(34px, 6vw, 56px)/1.0 var(--font-head); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.lede { font-size: 18px; line-height: 1.55; max-width: 64ch; margin: 0; color: var(--fg); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font: 13px/1.4 var(--font-mono); color: var(--muted); }
+.meta b { color: var(--fg); font-weight: 500; }
+h2 { font: 600 26px/1.15 var(--font-head); margin: 0 0 14px; text-wrap: balance; }
+h3 { font: 600 18px/1.25 var(--font-head); margin: 18px 0 8px; }
+section { padding-top: 44px; display: grid; gap: 14px; }
+section > p, section > ul, section > ol { max-width: 72ch; margin: 0; }
+p { margin: 0; }
+ul, ol { padding-left: 1.25em; display: grid; gap: 6px; }
+a { color: var(--info); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code, .mono { font-family: var(--font-mono); font-size: .92em; }
+.verdict { display: grid; gap: 10px; background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 6px; max-width: 80ch; }
+.verdict p { max-width: 74ch; }
+.specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); overflow: hidden; }
+.specs div { padding: 12px 16px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 0; }
+.specs dt { font: 600 11px/1.3 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.specs dd { margin: 4px 0 0; font-size: 14px; line-height: 1.45; }
+figure { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: grid; gap: 10px; min-width: 0; }
+figcaption { font-size: 13px; color: var(--muted); max-width: 80ch; }
+.map { overflow-x: auto; }
+.map svg { width: 100%; min-width: 560px; height: auto; display: block; }
+.map .pcb { fill: var(--mask-soft); stroke: var(--mask); stroke-width: 2; }
+.map .h7 { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 7 5; }
+.map .conn { fill: var(--paper); stroke: var(--fg); stroke-width: 1.4; }
+.map .sock { fill: var(--soft); stroke: var(--fg); stroke-width: 1.2; }
+.map .sens { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.4; }
+.map .bot { fill: none; stroke: var(--info); stroke-width: 1.3; stroke-dasharray: 4 3; }
+.map .tp { fill: var(--accent); opacity: .55; }
+.map .hole { fill: var(--bg); stroke: var(--muted); stroke-width: 1.3; }
+.map .hole2 { fill: var(--bg); stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .lab { font: 600 13px var(--font-head); fill: var(--fg); }
+.map .small { font: 500 11.5px var(--font-mono); fill: var(--muted); }
+.map .note { font: 400 11px var(--font-mono); fill: var(--muted); }
+.map .fwd { stroke: var(--accent); stroke-width: 3; }
+.map .fwdh { fill: var(--accent); }
+.map .fwdt { font: 700 12px var(--font-mono); fill: var(--accent); }
+.map .dim { stroke: var(--muted); stroke-width: 1; }
+.map .dimt { font: 500 11px var(--font-mono); fill: var(--muted); }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+th { font: 600 11.5px/1.3 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--soft); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chip { display: inline-block; font: 600 11px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 7px; border-radius: 4px; white-space: nowrap; }
+.fixed { background: var(--ok-soft); color: var(--ok); }
+.verified { background: var(--info-soft); color: var(--info); }
+.next { background: var(--warn-soft); color: var(--warn); }
+.yes { color: var(--ok); font-weight: 600; }
+.part { color: var(--warn); font-weight: 600; }
+.no { color: var(--accent); font-weight: 600; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.card h3 { margin: 0; }
+.steps { counter-reset: s; list-style: none; padding: 0; display: grid; gap: 10px; max-width: 80ch; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+.steps li::before { content: counter(s); font: 700 15px/30px var(--font-head); text-align: center; width: 30px; height: 30px; border-radius: 50%; background: var(--fg); color: var(--bg); }
+.sources { font-size: 13px; color: var(--muted); columns: 2 320px; column-gap: 28px; }
+.sources li { break-inside: avoid; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+pre.mermaid { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 16px; overflow-x: auto; margin: 0; }
+@media (max-width: 560px) { .lede { font-size: 16px; } h2 { font-size: 23px; } }
+</style>
+
+<div class="wrap">
+
+<header class="doc">
+  <div class="eyebrow">Design review · revision R0.3 · 24 Nov 2026</div>
+  <h1>FC Carrier R0.3</h1>
+  <p class="lede">A 68 × 40 mm flight-controller carrier for Arduino® Portenta H7. It plugs onto the module's two high-density connectors and turns it into an ArduPilot-class autopilot with Pixhawk-standard ports, microSD logging and DroneCAN.</p>
+  <div class="meta"><span><b>Status</b> fab-ready, not yet built</span><span><b>Checks</b> DRC · ERC · DFM · EMI · socket match</span><span><b>Source</b> KiCad 7, generated from one Python netlist</span></div>
+</header>
+
+<section id="verdict">
+  <h2>Verdict</h2>
+  <div class="verdict">
+    <p><b>The hardware is sound and ready for a first prototype run.</b> The review found five functional problems that would have shown up only on the bench or in flight. All five are fixed in R0.3: the ADC reference, a shared ESC-telemetry UART, an LED output on a timer without DMA, fragile analog sense pads, and too little buck output capacitance.</p>
+    <p><b>The real gap is firmware.</b> No ArduPilot, PX4 or Betaflight build exists for the Portenta's STM32H747. ArduPilot already runs the nearly identical STM32H757, so a port is realistic: about 8–12 person-weeks to a flying prototype.</p>
+    <p><b>Recommended path:</b> build five boards, port ArduPilot, fly them, then approach Arduino as a Technical Partner with flight logs, a family-compatibility matrix and volume pricing.</p>
+  </div>
+</section>
+
+<section id="specs">
+  <h2>At a glance</h2>
+  <dl class="specs">
+    <div><dt>Board</dt><dd>68 × 40 mm, 4 layers (GND and 5 V planes), 1.6 mm, JLCPCB-assembled both sides</dd></div>
+    <div><dt>Module</dt><dd>Portenta H7 / H7 Lite (STM32H747, M7 480 MHz + M4) on two Hirose DF40, 3.5 mm stack</dd></div>
+    <div><dt>Power</dt><dd>3–6S LiPo, TI LMR33630 buck: 5.25 V, 2 A continuous (1.5 A from 3S), 3 A peak</dd></div>
+    <div><dt>Sensors</dt><dd>TDK ICM-45686 IMU (SPI) at the board centre · TE MS5607 barometer under the module</dd></div>
+    <div><dt>Logging</dt><dd>microSD, 4-bit SDMMC2, own 100 nF at the card</dd></div>
+    <div><dt>Ports</dt><dd>GPS (6), TELEM with flow control (6), RC (4), UART (4), CAN (4), I2C (4): JST-GH, Pixhawk DS-009 pinouts</dd></div>
+    <div><dt>Outputs</dt><dd>4-in-1 ESC on JST-SH 8 (Betaflight standard), DShot / bidirectional DShot on all four motors · S5, S6, WS2812 LED, buzzer pads</dd></div>
+    <div><dt>Battery sense</dt><dd>VBAT 11:1 and ESC current into a 2.5 V reference ADC (REF3125)</dd></div>
+    <div><dt>Mounting</dt><dd>30.5 mm M3 stack pattern · module held by its own four M2 holes</dd></div>
+    <div><dt>BOM</dt><dd>63 placed parts, 32 lines · about $27.21 per board in parts at 10 boards, sockets included, Portenta module not included</dd></div>
+  </dl>
+</section>
+
+<section id="map">
+  <h2>Board map</h2>
+  <figure>
+    <div class="map"><svg viewBox="0 0 754 470" role="img" aria-label="Top view of the carrier with ports, holes and the Portenta outline"><rect class="pcb" x="26.0" y="26.0" width="680.0" height="400.0" rx="12.0"/><rect class="h7" x="35.8" y="99.0" width="660.4" height="254.0" rx="8.0"/><text class="note" x="684.2" y="343.0" text-anchor="end">Portenta H7 outline (module sits 3.5 mm above)</text><rect class="conn" x="378.8" y="26.0" width="94.4" height="64.0" rx="6.0"/><text class="lab" x="426.0" y="63.5" text-anchor="middle">UART3</text><rect class="conn" x="258.8" y="26.0" width="94.4" height="64.0" rx="6.0"/><text class="lab" x="306.0" y="63.5" text-anchor="middle">RC</text><rect class="tp" x="586.5" y="366.5" width="19.0" height="19.0" rx="2.0"/><rect class="tp" x="650.5" y="396.5" width="19.0" height="19.0" rx="2.0"/><rect class="conn" x="262.0" y="360.2" width="118.0" height="65.6" rx="6.0"/><text class="lab" x="321.0" y="398.5" text-anchor="middle">ESC 4-in-1</text><rect class="conn" x="41.2" y="26.0" width="119.6" height="64.0" rx="6.0"/><text class="lab" x="101.0" y="63.5" text-anchor="middle">GPS</text><rect class="sens" x="448.0" y="128.5" width="36.0" height="55.0" rx="6.0"/><text class="small" x="466.0" y="198.5" text-anchor="middle">BARO</text><rect class="tp" x="618.5" y="366.5" width="19.0" height="19.0" rx="2.0"/><rect class="conn" x="53.8" y="362.0" width="94.4" height="64.0" rx="6.0"/><text class="lab" x="101.0" y="399.5" text-anchor="middle">CAN</text><rect class="tp" x="586.5" y="396.5" width="19.0" height="19.0" rx="2.0"/><rect class="sock" x="189.2" y="132.0" width="36.0" height="188.0" rx="6.0"/><text class="small" x="207.2" y="338.0" text-anchor="middle">J1 (DF40)</text><rect class="tp" x="650.5" y="366.5" width="19.0" height="19.0" rx="2.0"/><rect class="sock" x="621.0" y="132.0" width="36.0" height="188.0" rx="6.0"/><text class="small" x="639.0" y="338.0" text-anchor="middle">J2 (DF40)</text><rect class="conn" x="569.2" y="26.0" width="119.6" height="64.0" rx="6.0"/><text class="lab" x="629.0" y="63.5" text-anchor="middle">TELEM1</text><rect class="tp" x="618.5" y="396.5" width="19.0" height="19.0" rx="2.0"/><rect class="sens" x="348.5" y="211.0" width="35.0" height="30.0" rx="6.0"/><text class="small" x="366.0" y="256.0" text-anchor="middle">IMU</text><rect class="conn" x="384.8" y="362.0" width="94.4" height="64.0" rx="6.0"/><text class="lab" x="432.0" y="399.5" text-anchor="middle">I2C</text><rect class="bot" x="74.5" y="150.5" width="75.0" height="55.0" rx="6.0"/><text class="small" x="112.0" y="183.0" text-anchor="middle">BUCK (bottom)</text><rect class="bot" x="550.5" y="157.6" width="130.5" height="136.8" rx="6.0"/><text class="small" x="615.8" y="231.0" text-anchor="middle">microSD (bottom)</text><circle class="hole" cx="213.5" cy="73.5" r="16.0"/><circle class="hole" cx="213.5" cy="378.5" r="16.0"/><circle class="hole" cx="518.5" cy="73.5" r="16.0"/><circle class="hole" cx="518.5" cy="378.5" r="16.0"/><circle class="hole2" cx="56.1" cy="119.3" r="11.5"/><circle class="hole2" cx="56.1" cy="332.7" r="11.5"/><circle class="hole2" cx="675.9" cy="119.3" r="11.5"/><circle class="hole2" cx="675.9" cy="332.7" r="11.5"/><text class="small" x="631.0" y="352.0" text-anchor="middle">S5 S6 LED / BUZ 5V GND</text><text class="small" x="41.0" y="238.0" text-anchor="start">USB-C</text><line class="fwd" x1="426.0" y1="226.0" x2="511.0" y2="226.0"/><path class="fwdh" d="M526.0 226.0 L508.0 216.0 L508.0 236.0 Z"/><text class="fwdt" x="468.0" y="214.0" text-anchor="middle">FWD</text><line class="dim" x1="26.0" y1="440.0" x2="706.0" y2="440.0"/><text class="dimt" x="366.0" y="455.0" text-anchor="middle">68.0 mm</text><line class="dim" x1="720.0" y1="26.0" x2="720.0" y2="426.0"/><text class="dimt" x="730.0" y="226.0" text-anchor="middle" transform="rotate(90 730.0 226.0)">40.0 mm</text></svg></div>
+    <figcaption>Top view, drawn from the board file. The dashed outline is the Portenta H7, which covers most of the top side. Blue dashed parts are on the bottom. The forward arrow (also printed on both sides of the board) points away from the USB-C end.</figcaption>
+  </figure>
+  <pre class="mermaid">
+flowchart LR
+  BAT["3-6S battery<br/>pads or ESC harness"] --> TVS["SMBJ26A TVS"] --> BUCK["LMR33630 buck<br/>5.25 V / 2 A"] --> D2["SS34"] --> V5["+5 V rail"]
+  V5 --> VIN["H7 VIN"]
+  V5 --> LDO["LP5907 3.3 V<br/>sensor rail"]
+  LDO --> IMU["ICM-45686 IMU<br/>SPI"]
+  LDO --> BARO["MS5607 baro<br/>I2C"]
+  H7["Portenta H7<br/>STM32H747"] --- VIN
+  H7 --> V33["module +3V3"]
+  V33 --> CAN["SN65HVD230<br/>CAN"]
+  V33 --> SD["microSD"]
+  V33 --> REF["REF3125<br/>2.5 V VREF+"]
+  H7 --- PORTS["GPS · TELEM · RC · UART · I2C"]
+  H7 --- ESC["4-in-1 ESC<br/>DShot + telemetry"]
+  </pre>
+</section>
+
+<section id="method">
+  <h2>How the review was run</h2>
+  <p>Six tracks worked in parallel, each with a written brief and sourced findings. The layout lead then fixed the board and re-ran every check.</p>
+  <div class="two">
+    <div class="card"><h3>Hardware integration</h3><p>How a carrier must treat the Portenta's power, reference and boot pins; family compatibility with H7 Lite, C33 and X8.</p></div>
+    <div class="card"><h3>Firmware and MCU pins</h3><p>ArduPilot, PX4, Betaflight and INAV support; timer, DMA and UART capability of every pin used, from ArduPilot's STM32H757 tables.</p></div>
+    <div class="card"><h3>Circuit</h3><p>Block-by-block check against the TI, TDK, TE and ST datasheets.</p></div>
+    <div class="card"><h3>Standards and market</h3><p>Pixhawk DS-009 and Betaflight connector standards; competing H7 flight controllers and prices.</p></div>
+    <div class="card"><h3>Arduino ecosystem</h3><p>Partner programmes, precedents, trademark and licensing rules.</p></div>
+    <div class="card"><h3>Layout and mechanics</h3><p>3D fit under the module from Arduino's own STEP model, silkscreen, connector access, placement.</p></div>
+  </div>
+</section>
+
+<section id="fixed">
+  <h2>Found and fixed in R0.3</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Issue</th><th>Why it matters</th><th>Fix on the board</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>ADC reference (J2-71) left to the module</td><td>The module only pulls VREF+ up through ~100 kΩ; users measured it sagging from 3.1 V to ~2.6 V during conversions. Battery and current readings would drift by up to ~19 %.</td><td>TI REF3125 2.5 V series reference drives VREF+; VREF- to GND. Works from 3.0 V (USB power).</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>ESC telemetry shared UART3's input with the J7 port</td><td>Two outputs on one line when both are connected.</td><td>Telemetry now on PA8 = UART7_RX (J2-59); motor M1 moved to PK1, still TIM1_CH1.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>LED-strip output on TIM12</td><td>TIM12 has no DMA on the H7, so WS2812 LEDs could not be driven.</td><td>LED strip on PJ10 = TIM8_CH2 (DMA); S5 on PH6. Swapped nets, no copper moved.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>Sense inputs on PA0_C / PA1_C</td><td>Analog-only pads: 4.0 V absolute maximum, no injection allowed, and unsupported in ArduPilot without a patch.</td><td>Moved to PA4 / PA6 (J2-78/80); current-sense series resistor 1 k → 10 k.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>Buck output capacitance</td><td>Two 0805 22 µF parts give ~20 µF at 5.25 V; TI's table for 5 V / 400 kHz uses 4 × 22 µF.</td><td>Two more 22 µF (25 V) added at the buck output.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>CAN terminator off by default</td><td>The flight controller is an end of the bus.</td><td>Bridged solder jumper (declared net tie): terminated by default, cut to remove.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>Buzzer MOSFET gate at 3.0 V</td><td>Close to the 2N7002's 2.5 V maximum threshold.</td><td>Pull-down 10 k → 100 k: gate sees 3.27 V.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>No forward arrow; port names hidden by the module</td><td>Firmware board orientation needs it; the H7 covers most top-side labels.</td><td>"FWD" arrows on both sides; port names printed on the bottom behind each connector.</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>"PORTENTA" printed on the board</td><td>Arduino's trademark guide forbids its marks on third-party boards.</td><td>Neutral board ID; documents say "for Arduino® Portenta H7".</td><td><span class="chip fixed">Fixed</span></td></tr>
+      <tr><td>Same-week fixes</td><td>From the verification pass before the review.</td><td>microSD decoupling at the card; buck thermal vias and wider power copper (5 V rating corrected to 2 A); schematic links restored; ERC and parity script; an SD data track moved off a pad corner that JLCDFM would flag.</td><td><span class="chip fixed">Fixed</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="verified">
+  <h2>Verified</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Check</th><th>Result</th><th>Method</th></tr></thead>
+    <tbody>
+      <tr><td>Socket pin 1 and geometry</td><td><span class="chip verified">0.000 mm</span> all 160 pads match Arduino's Portenta Breakout; same signal on all 57 pins used</td><td>Arduino's Altium layout read pad by pad (<code>check_sockets.py</code>)</td></tr>
+      <tr><td>Hirose land pattern and keep-out</td><td><span class="chip verified">Pass</span> no foreign copper in the hatched area</td><td>Hirose drawing EDC-337747-51-01</td></tr>
+      <tr><td>Fit under the module</td><td><span class="chip verified">1.9 of 3.5 mm</span> tallest module part 0.9 mm + barometer 1.0 mm</td><td>305 solids from Arduino's STEP model</td></tr>
+      <tr><td>Schematic rules and netlist parity</td><td><span class="chip verified">ERC clean, schematic = PCB pad for pad</span></td><td>Pin, label and single-net checks; every pad's net, value and footprint against the PCB</td></tr>
+      <tr><td>Design rules</td><td><span class="chip verified">0 unconnected, 0 clearance errors (1 sliver warning, 2 courtyard overlaps with the module's own holes)</span></td><td>KiCad DRC at JLCPCB's 0.127 mm rule; routing targets 0.16 mm</td></tr>
+      <tr><td>Manufacturability</td><td><span class="chip verified">JLCDFM-style: 0 danger items</span></td><td>JLCDFM-style checks (<code>dfm.py</code>), pads measured as plain rectangles as JLCDFM does</td></tr>
+      <tr><td>Barometer and microSD layouts</td><td><span class="chip verified">Pass</span></td><td>TE MS5607 and Molex 104031 recommended layouts</td></tr>
+      <tr><td>Motor timers</td><td><span class="chip verified">Pass</span> TIM1 / TIM3, no complementary channels, DMA: DShot and bidirectional DShot</td><td>ArduPilot STM32H757 alternate-function table</td></tr>
+      <tr><td>Connector standards</td><td><span class="chip verified">Pass</span> GPS, TELEM, CAN, I2C match Pixhawk DS-009; ESC matches Betaflight</td><td>Published pinouts</td></tr>
+      <tr><td>USB-only power</td><td><span class="chip verified">Pass</span> the module back-feeds VIN through its Schottky, so +5 V and the sensor rail run on USB; D2 keeps it out of the buck</td><td>Arduino and OpenMV documentation, user measurements</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="family">
+  <h2>Portenta family compatibility</h2>
+  <p>Arduino will ask which modules the carrier supports. The answer, pin by pin:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Module</th><th>Verdict</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Portenta H7</td><td class="yes">Target</td><td>All functions as designed.</td></tr>
+      <tr><td>Portenta H7 Lite</td><td class="yes">Yes</td><td>Same pinout; no Wi-Fi or Bluetooth, which a flight controller does not need.</td></tr>
+      <tr><td>Portenta C33</td><td class="part">Partly</td><td>Same pins for UARTs, I2C, CAN, SD and SPI. The C33 Arduino core lacks PWM on some outputs and UART flow control. J2-71 is an output there, so build without the reference (U7).</td></tr>
+      <tr><td>Portenta X8</td><td class="no">Not as a flight controller</td><td>UART2 carries the Linux console, SWD reaches the i.MX, and real-time I/O goes through the Linux-to-STM32 bridge. It can draw 0.8 A on VIN.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="firmware">
+  <h2>Firmware plan</h2>
+  <p>ArduPilot is the realistic target. A board definition for this carrier needs:</p>
+  <ul>
+    <li><b>Clock:</b> the Portenta's 25 MHz oscillator in HSE-bypass mode, enabled by PH1 before clock start-up.</li>
+    <li><b>Supply mode:</b> "SMPS 1.8 V supplies LDO", a small addition to ArduPilot's power-mode options.</li>
+    <li><b>Bootloader and PMIC:</b> keep Arduino's MCUboot (application at 0x08040000), which already configures the PF1550 PMIC. About 1.4 MB of flash remains for the application.</li>
+    <li><b>USB:</b> the USB-C port uses a ULPI high-speed PHY that ArduPilot does not support yet. Start with MAVLink over the telemetry UART.</li>
+    <li><b>Pins:</b> the IMU bus is the MCU's SPI2; ESC telemetry is UART7 RX; TELEM1 flow control runs on GPIOs; the M4 core stays halted.</li>
+  </ul>
+  <p><b>Effort:</b> 8–12 person-weeks to a flying prototype with logging, for one engineer who knows ArduPilot. <b>Main risks:</b> a wrong supply mode leaves the MCU unbootable until recovered over SWD; the flash budget with MCUboot; USB high-speed support.</p>
+</section>
+
+<section id="market">
+  <h2>Market and positioning</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Flight controller</th><th>MCU</th><th>IMUs</th><th>Price</th><th>Size</th></tr></thead>
+    <tbody>
+      <tr><td>Holybro Pixhawk 6C</td><td>H743</td><td>2, heated</td><td class="n">$199</td><td class="n">84.8 × 44 mm</td></tr>
+      <tr><td>Holybro Pixhawk 6C Mini</td><td>H743</td><td>2, heated</td><td class="n">$179–198</td><td class="n">53.3 × 39 mm</td></tr>
+      <tr><td>ARK FPV</td><td>H743</td><td>1, heated</td><td class="n">$170–195</td><td class="n">36 × 36 mm</td></tr>
+      <tr><td>Matek H743-SLIM V4</td><td>H743</td><td>2</td><td class="n">$129</td><td class="n">30.5 pattern</td></tr>
+      <tr><td>Holybro Kakute H7</td><td>H743</td><td>1</td><td class="n">$85</td><td class="n">35 × 35 mm</td></tr>
+      <tr><td><b>FC Carrier R0.3 + Portenta H7</b></td><td>H747 module</td><td>1 (ICM-45686)</td><td class="n">module $114 + carrier</td><td class="n">68 × 40 mm</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div class="card"><h3>Where it fits</h3><p>Between FPV boards and the Pixhawk class: 7-inch and larger long-range, research and teaching aircraft. It cannot win on price against $85–130 FPV boards.</p></div>
+    <div class="card"><h3>What only it offers</h3><p>A swappable Arduino module and the Arduino toolchain, with the M4 core free for the user's own code beside the autopilot. Arduino has no flight-control product today.</p></div>
+    <div class="card"><h3>Gaps against the market</h3><p>Single unheated IMU, no 9–12 V video regulator, four UARTs, six PWM outputs, no OSD chip. All are in the R0.4 plan or acceptable for digital video.</p></div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>Next revision (R0.4)</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Item</th><th>Why</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Fuse, reverse-polarity protection, bulk input capacitor</td><td>The TVS clamp can exceed the buck's 38 V absolute maximum on large surges; a reversed pack destroys the input stage.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>Higher-voltage buck (2–8S)</td><td>Competitors accept 2–8S; allows a TVS with more margin.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>ESD arrays on connectors; current-limited peripheral 5 V</td><td>Protects a $114 module from field handling and crushed cables.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>9–12 V video regulator</td><td>Digital FPV systems expect it.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>Second IMU or IMU heater</td><td>Pixhawk-class boards ship redundancy and temperature control.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>Pixhawk debug, POWER and 10-pin GPS ports; second CAN</td><td>Plug-in compatibility with Pixhawk accessories.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>USB full-speed pads (J1-26/28) and BOOT pad</td><td>ST ROM DFU recovery and ArduPilot USB without ULPI work.</td><td><span class="chip next">R0.4</span></td></tr>
+      <tr><td>Ideal diode instead of D2; IMU capacitors closer to its pins; SD bus over solid plane</td><td>5 V headroom and efficiency; noise; EMI.</td><td><span class="chip next">R0.4</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="arduino">
+  <h2>Working with Arduino</h2>
+  <div class="two">
+    <div class="card"><h3>Route in</h3><p>Arduino's Technical Partner track, through the Arduino Pro contact form. Ask for design validation, a store listing and blog or docs coverage before any co-branding. Precedent: ROBOTIS's DYNAMIXEL shield was blogged and is sold by Arduino.</p></div>
+    <div class="card"><h3>Name and licence</h3><p>Own brand, phrased "&lt;Brand&gt; flight-controller carrier for Arduino® Portenta H7", with the wording approved in writing. No Arduino marks on the board. Open hardware under CERN-OHL-W.</p></div>
+    <div class="card"><h3>What to bring</h3><p>A flying prototype with logs; vibration, brown-out and thermal data; the compatibility matrix in Arduino's datasheet style; an Arduino library with examples; 1k / 5k pricing; a CE / FCC plan and a support model.</p></div>
+  </div>
+</section>
+
+<section id="next">
+  <h2>Next steps</h2>
+  <ol class="steps">
+    <li><span>Order five boards from JLCPCB, with the Hirose sockets consigned; check U6, U7 and J11 in the placement preview.</span></li>
+    <li><span>Bring-up on the bench: rails, SWD, IMU and barometer, microSD, CAN, buck load step at 12 V and 25 V.</span></li>
+    <li><span>Write the ArduPilot board definition and fly on a 7-inch frame with logging.</span></li>
+    <li><span>Fold the findings into R0.4 with the items above.</span></li>
+    <li><span>Contact Arduino Pro with the flight data and this review.</span></li>
+  </ol>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="sources">
+    <li><a href="https://docs.arduino.cc/hardware/portenta-h7/">Arduino Portenta H7 documentation</a></li>
+    <li><a href="https://forum.arduino.cc/t/adc-vref-stability/1029580">Arduino forum: Portenta ADC Vref stability</a></li>
+    <li><a href="https://www.arduino.cc/en/trademark/guides/trademark-guide-for-compatible-products/">Arduino trademark guide for compatible products</a></li>
+    <li><a href="https://www.arduino.cc/pro/partnerships-integrator-program">Arduino Partnership Program</a></li>
+    <li><a href="https://ardupilot.org/dev/docs/porting.html">ArduPilot porting guide</a></li>
+    <li><a href="https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef">ArduPilot ChibiOS board definitions (STM32H757, Cube Orange+)</a></li>
+    <li><a href="https://betaflight.com/docs/development/manufacturer/connector-standard">Betaflight connector standard</a></li>
+    <li><a href="https://docs.arkelectron.com/knowledge-base/knowledge-base/connectors-and-wiring">Pixhawk connector pinouts (ARK)</a></li>
+    <li><a href="https://www.ti.com/lit/ds/symlink/lmr33630.pdf">TI LMR33630 data sheet</a></li>
+    <li><a href="https://www.ti.com/product/REF31">TI REF31xx voltage references</a></li>
+    <li><a href="https://docs.px4.io/main/en/flight_controller/pixhawk6c">PX4: Pixhawk 6C</a></li>
+    <li><a href="https://www.hirose.com/product/p/CL0684-4162-7-51">Hirose DF40HC(3.5)-80DS-0.4V(51)</a></li>
+  </ul>
+</section>
+
+<footer>FC Carrier R0.3 for Arduino® Portenta H7. Arduino® and Portenta are trademarks of Arduino S.r.l. / Arduino SA; this is an independent design, not an Arduino product. Prices and stock as checked on 14–15 Nov 2026.</footer>
+
+</div>

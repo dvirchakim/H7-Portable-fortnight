@@ -1,0 +1,227 @@
+{
+ "_about": "Per LCSC part: how JLCPCB's EasyEDA footprint sits in our KiCad library footprint's frame (L = R(deg) E + t, mm). Measured 2026-11-14 by fitting the pad layouts (pads matched by number; polarised 2-pin parts matched by function). rms = fit residual in mm (pad-size differences, not misplacement).",
+ "C13585": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.118
+ },
+ "C14663": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.075
+ },
+ "C52923": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.06
+ },
+ "C1525": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.06
+ },
+ "C45783": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.05
+ },
+ "C12530": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.06
+ },
+ "C15850": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.05
+ },
+ "C123820": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.211,
+  "note": "JLC pad 1 = cathode, as ours"
+ },
+ "C8678": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.2,
+  "note": "JLC pad 1 = cathode, as ours"
+ },
+ "C81598": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.085,
+  "note": "JLC pad 1 = cathode, as ours"
+ },
+ "C2286": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.037,
+  "note": "JLC pad 1 = ANODE (ours: cathode); matched cathode to cathode"
+ },
+ "C2290": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.013,
+  "note": "JLC pad 1 = ANODE (ours: cathode); matched cathode to cathode"
+ },
+ "C133065": {
+  "deg": 0,
+  "tx": 0,
+  "ty": -0.175,
+  "rms": 0.0,
+  "note": "JLC origin 0.175 mm off ours"
+ },
+ "C189895": {
+  "deg": 0,
+  "tx": 0.001,
+  "ty": -0.25,
+  "rms": 0.0,
+  "note": "JLC origin 0.25 mm off ours"
+ },
+ "C160407": {
+  "deg": 0,
+  "tx": 0.001,
+  "ty": -0.063,
+  "rms": 0.001
+ },
+ "C585350": {
+  "deg": 180,
+  "tx": 0.026,
+  "ty": -0.113,
+  "rms": 0.017,
+  "note": "JLC footprint drawn rotated 180"
+ },
+ "C2847478": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.15
+ },
+ "C8545": {
+  "deg": 180,
+  "tx": 0.021,
+  "ty": 0,
+  "rms": 0.058,
+  "note": "SOT-23 drawn rotated 180"
+ },
+ "C25741": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C25794": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C25752": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C25744": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C25879": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C25079": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C11702": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.077
+ },
+ "C841384": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.0
+ },
+ "C80670": {
+  "deg": 180,
+  "tx": 0.033,
+  "ty": 0,
+  "rms": 0.16,
+  "note": "SOT-23-5 drawn rotated 180"
+ },
+ "C2988404": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.1
+ },
+ "C3232508": {
+  "deg": 90,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.075,
+  "note": "JLC footprint drawn rotated 90"
+ },
+ "C12084": {
+  "deg": 270,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.125,
+  "note": "SOIC-8 drawn rotated 270"
+ },
+ "C3641790": {
+  "deg": 90,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.365,
+  "note": "body symmetric, long axis aligned; JLC's pad numbering is the mirror of ours, which does not matter: each socket contact joins the pad under it to the H7 pin above it"
+ },
+ "C22459454": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.1
+ },
+ "C97627": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.025
+ },
+ "C33297": {
+  "deg": 180,
+  "tx": 0.0,
+  "ty": 0.0,
+  "rms": 0.297,
+  "note": "SOT-23 drawn rotated 180, same pad arrangement as C8545 (pads 1/2 at +x, 3 at -x; y mirrored as in all EasyEDA fits); JLC's pads sit 1.235 mm out vs our 0.938, both rows symmetric about the origin, so no offset (a 3-pad least-squares fit would wrongly bias tx by 0.1). EasyEDA symbol: 1 IN, 2 OUT, 3 GND"
+ },
+ "C17168": {
+  "deg": 0,
+  "tx": 0.0,
+  "ty": 0.0,
+  "rms": 0.047
+ }
+}
