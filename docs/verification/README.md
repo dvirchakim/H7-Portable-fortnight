@@ -129,3 +129,12 @@
        harmless at ESC/DShot speeds.
      - The real cost is the SD-card lines. SDC_CLK runs 20 mm over gaps. That is in the
        next-revision EMI list (move UART1 off In2, then re-route the SD bus over solid plane).
+
+## Bring-up / production test
+
+1. Unpowered: no short between VBAT, +5V, +3V3, +3V3_SENS and GND.
+2. 12 V, 100 mA current limit on VBAT: +5V_BUCK about 5.25 V, +5V about 4.9 V (after the SS34),
+   +3V3_SENS 3.3 V; note the idle current.
+3. H7 fitted: SWD connects; I2C scan finds the MS5607 at 0x76; IMU WHO_AM_I over SPI; microSD
+   write/read; CAN loopback with a second node; UART loopbacks; PWM outputs on a scope;
+   calibrate VBAT_SENSE; buzzer and both LEDs.

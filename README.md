@@ -82,7 +82,7 @@ run from USB on the bench and USB cannot back-feed the buck.
 |---|---|
 | [Rev 0.3 changes](docs/rev-0.3/README.md) | The design review: what was found and fixed, what's left for rev 0.4 |
 | [Rev 0.2 changes](docs/rev-0.2/README.md) | Re-route, buck loop, EMI ring, cost pass, sensor swap |
-| [Verification](docs/verification/README.md) | The "must verify before ordering" checks, one by one, with results |
+| [Verification](docs/verification/README.md) | The "must verify before ordering" checks with results, and the bring-up / production test |
 | [Ordering](docs/ordering/README.md) | What to upload to JLCPCB, stackup, consigning the DF40 sockets |
 | [BOM and cost](docs/bom-and-cost/README.md) | Cost per board and why each main part was chosen |
 | [Placement check](docs/placement-check/README.md) | JLCPCB footprint corrections and what they caught |
@@ -90,7 +90,6 @@ run from USB on the bench and USB cannot back-feed the buck.
 | [EMI](docs/emi/README.md) | Layout checks and the bench test procedure |
 | [Routing](docs/routing/README.md) | Layer stack and the routing flow |
 | [Silkscreen](docs/silkscreen/README.md) | Labels, forward arrows, QR code |
-| [Lessons from design houses](docs/lessons/README.md) | Practices adopted, bring-up and production test |
 | [Firmware](docs/firmware/README.md) | The ArduPilot port: what the board definition needs |
 | [Design review page](docs/FC_Carrier_R0.3_review.html) | The rev 0.3 review written for an Arduino Pro pitch |
 
