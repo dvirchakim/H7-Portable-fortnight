@@ -10,6 +10,14 @@ geometry). It is an untested first build. All "Must verify before ordering" chec
 Two steps are still yours at order time: consign the DF40 sockets, and check the bottom-side
 parts in JLCPCB's placement preview (item 8, mainly U6 and J11).
 
+![The carrier with a Portenta H7 fitted](docs/render_assembled.png)
+
+![The carrier on its own](docs/render_carrier.png)
+
+3D renders made headlessly from the board files (`scripts/render3d/run.sh`): every carrier part is drawn as a
+block from KiCad's STEP export, the board faces show the real copper, solder mask and silkscreen, and the
+Portenta H7 is reduced to blocks from Arduino's own 3D model (from the Portenta Breakout CAD bundle).
+
 ## What changed in rev 0.3 (design review, 2026-11-15)
 
 A review by five parallel research/review tracks (hardware integration, firmware, circuit, market and
@@ -228,6 +236,7 @@ The bottom carries the board ID and a 10.9 mm QR code for https://github.com/dvi
 | `scripts/check_sockets.py` | Compares J1/J2 pad by pad with Arduino's Portenta Breakout and Hirose's land pattern / hatched area (exit 0 = match) |
 | `scripts/erc.py` | ERC for the generated schematic plus schematic-vs-PCB parity, pad by pad (exit 0 = clean) |
 | `scripts/power_copper.py` | Thermal vias in U1's exposed pad and power tracks widened as far as clearance allows |
+| `scripts/render3d/` | Headless 3D renders of the board (STEP export -> blocks, layer textures, Blender) |
 | `scripts/r03_renet.py`, `scripts/r03_rip.py` | The rev 0.3 review changes as applied to the routed board: net swaps, pad re-assignments, new footprints, then removal of the obsolete copper (run once; kept as the record) |
 | `scripts/altium_pads.py` | Reads pads/nets from an Altium `.PcbDoc` with plain Python (made the reference JSON) |
 
