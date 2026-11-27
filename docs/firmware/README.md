@@ -16,7 +16,8 @@ What an ArduPilot hwdef for this board needs:
   are not USART1's hardware flow-control pins, so use ArduPilot's GPIO flow control; leave PC2/PC3's
   analog switches open (J2-74/76/77/79 unconnected) and don't wire SWO (PB3 is SD D2).
 - **M4 core:** leave it halted.
-Drivers: ICM-45686 (Invensense v3 family), MS5607 (MS56xx). Recovery: Arduino double-tap DFU over
+Drivers: ICM-45686 (Invensense v3 family), BMP581
+(`BARO BMP581 I2C:0:0x46`). Recovery: Arduino double-tap DFU over
 USB-C, or the SWD pads.
 
 A first ArduPilot board definition (`PortentaH7-FCCarrier`, compile-only) exists on a local ArduPilot branch, `portenta-h7-fc-carrier`; it is not in this repository yet.

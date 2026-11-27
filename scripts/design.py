@@ -170,20 +170,24 @@ part(B, 'U3', 'ICM-42688-P', 'ICM-45686', 'Package_LGA:LGA-14_3x2.5mm_P0.5mm_Lay
       ('11', 'RESV'), ('12', 'AP_CS'), ('13', 'AP_SCLK'), ('14', 'AP_SDI')],
      {1: 'SPI1_CIPO', 4: 'IMU_INT', 5: '+3V3_SENS', 6: 'GND', 7: 'GND', 8: '+3V3_SENS',
       12: 'IMU_CS', 13: 'SPI1_SCK', 14: 'SPI1_COPI'}, 'F', 34.0, 20.0, 0, 'ICM-45686')   # TDK, pin-compatible with ICM-42688-P; JLC 'normal' assembly
+# R0.4 cost pass kept it: every cheaper IMU at JLCPCB (ICM-42670-P, BMI270, ICM-42607, MPU-6500, ...) is flagged
+# 'processing difficult' (componentProductType 2).  The ICM-42670-P fits these pads unchanged if that ever changes.
 two(B, 'C11', 'C', '100n', C0402, '+3V3_SENS', 'GND', 'F', 30.6, 19.2)
 two(B, 'C12', 'C', '100n', C0402, '+3V3_SENS', 'GND', 'F', 30.6, 20.8)
 two(B, 'C13', 'C', '2.2u', C0402, '+3V3_SENS', 'GND', 'F', 37.2, 20.0, 90)
 two(B, 'R4', 'R', '10k', R0402, '+3V3_SENS', 'IMU_CS', 'F', 34.0, 17.0)
 
 B = 'Baro + mag (I2C0)'
-part(B, 'U4', 'MS5607', 'MS5607-02BA03', 'Package_LGA:LGA-8_3x5mm_P1.25mm',
-     [('1', 'VDD'), ('2', 'PS'), ('3', 'GND'), ('4', 'CSB'), ('5', 'CSB'), ('6', 'SDO'),
-      ('7', 'SDI/SDA'), ('8', 'SCLK')],
-     {1: '+3V3_SENS', 2: '+3V3_SENS', 3: 'GND', 4: '+3V3_SENS', 5: '+3V3_SENS', 7: 'I2C0_SDA', 8: 'I2C0_SCL'},
-     'F', 44.0, 13.0, 180, 'MS560702BA03-50')   # TE: PS high = I2C, CSB high = address 0x76; SDO unused
-# rot 180: SDA/SCL face the I2C bus, so nothing crosses TE's "do not route tracks between pads" area
-# (U4_KEEPOUT rule area on F.Cu); C14 sits beside VDD (pin 1) as TE asks
-two(B, 'C14', 'C', '100n', C0402, '+3V3_SENS', 'GND', 'F', 47.1, 14.875, 0)
+part(B, 'U4', 'BMP581', 'BMP581', 'fc:Bosch_LGA-10_2x2mm_P0.5mm_BMP581',
+     [('1', 'VDDIO'), ('2', 'SCK'), ('3', 'VSS'), ('4', 'SDI'), ('5', 'SDO'), ('6', 'CSB'),
+      ('7', 'INT'), ('8', 'VSS'), ('9', 'VSS'), ('10', 'VDD')],
+     {1: '+3V3_SENS', 2: 'I2C0_SCL', 3: 'GND', 4: 'I2C0_SDA', 5: 'GND', 6: '+3V3_SENS', 7: 'GND',
+      8: 'GND', 9: 'GND', 10: '+3V3_SENS'},
+     'F', 44.0, 13.0, 0, 'BMP581')
+# Bosch BMP581 (R0.4, replaces the MS5607): I2C with CSB high, SDO low = address 0x46; INT unused, tied to GND as
+# Bosch recommends (the ArduPilot driver leaves the interrupt disabled).  Bosch: no tracks or vias under the body
+# (U4_KEEPOUT rule area) and no solder mask under it (opening in the footprint); C14 sits on the VDD/VDDIO corner.
+two(B, 'C14', 'C', '100n', C0402, '+3V3_SENS', 'GND', 'F', 43.0, 11.1, 180)
 part(B, 'U5', 'LIS3MDL', 'LIS3MDL', 'Package_LGA:LGA-12_2x2mm_P0.5mm',
      [('1', 'SCL'), ('2', 'GND'), ('3', 'GND'), ('4', 'C1'), ('5', 'VDD'), ('6', 'VDD_IO'),
       ('7', 'INT'), ('8', 'DRDY'), ('9', 'SA1'), ('10', 'CS'), ('11', 'SDA'), ('12', 'GND')],

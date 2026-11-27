@@ -223,5 +223,19 @@
   "tx": 0.0,
   "ty": 0.0,
   "rms": 0.047
+ },
+ "C3288646": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.1,
+  "note": "JLC footprint pads sit exactly where the ICM-45686 (C22459454) pads do, pad for pad"
+ },
+ "C5362283": {
+  "deg": 0,
+  "tx": 0,
+  "ty": 0,
+  "rms": 0.015,
+  "note": "our fc footprint was drawn in JLC/EasyEDA orientation (pin 1 left, upper); JLC rows at 0.78 mm vs Bosch 0.7625 mm"
  }
 }

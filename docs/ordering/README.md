@@ -14,6 +14,10 @@ squares). ENIG recommended for the 0.4 mm-pitch sockets and LGA sensors (HASL le
 Smallest features: 0.127 mm track/space, 0.45–0.50 mm vias with 0.2 mm drill.
 
 **Assembly:** Standard PCBA, both sides.
+- **U4 (BMP581 barometer) shows unticked in JLCPCB's BOM tool. Tick it.** JLCPCB rates every
+  barometer it stocks "Assembly Difficulty: High" and leaves those lines unticked by default; the
+  part is in stock (16k, 2026-11-27). The BMP581 is also flagged "processing difficult" and is a
+  Standard-PCBA-only part, which this order is anyway.
 - **J1/J2 sockets (C3641790) have no JLCPCB stock: consign them.** JLCPCB's global-sourcing quote
   (2026-11-16) was $0.71 each but **145 business days** lead time (factory order), which would push
   prototypes to mid-2027. Mouser and Digi-Key list the same DF40HC(3.5)-80DS-0.4V(51) in stock at

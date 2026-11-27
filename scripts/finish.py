@@ -23,7 +23,7 @@ QR_CAPTION = 'github.com/dvirchakim'
 SIZE = [1.0]                 # text height in use (1.0 mm, 0.8 mm as a last resort)
 # Board name / revision / date, as production boards carry.  No "Arduino" or "Portenta" on the board:
 # Arduino's trademark guide forbids its marks on third-party boards (text may say "for Arduino® Portenta H7").
-BOARD_ID = 'FC CARRIER  R0.3  2026-11'
+BOARD_ID = 'FC CARRIER  R0.4  2026-11'
 
 board = pcbnew.LoadBoard(PCB)
 bb = board.GetBoardEdgesBoundingBox()

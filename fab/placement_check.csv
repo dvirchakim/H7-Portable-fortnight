@@ -4,7 +4,7 @@ C10,C52923,B,0,0,0.000,180,0.0000,
 C11,C1525,F,0,0,0.000,0,0.0000,
 C12,C1525,F,0,0,0.000,0,0.0000,
 C13,C12530,F,90,0,0.000,90,0.0000,
-C14,C1525,F,0,0,0.000,0,0.0000,
+C14,C1525,F,180,0,0.000,180,0.0000,
 C16,C1525,F,90,0,0.000,90,0.0000,
 C17,C52923,F,90,0,0.000,90,0.0000,
 C18,C1525,B,0,0,0.000,180,0.0000,
@@ -59,6 +59,6 @@ R9,C25744,B,0,0,0.000,180,0.0000,
 U1,C841384,B,0,0,0.000,180,0.0000,
 U2,C80670,B,0,180,0.033,0,0.0000,SOT-23-5 drawn rotated 180
 U3,C22459454,F,0,0,0.000,0,0.0000,
-U4,C97627,F,180,0,0.000,180,0.0000,
+U4,C5362283,F,0,0,0.000,0,0.0000,"our fc footprint was drawn in JLC/EasyEDA orientation (pin 1 left, upper); JLC rows at 0.78 mm vs Bosch 0.7625 mm"
 U6,C12084,B,0,270,0.000,90,0.0000,SOIC-8 drawn rotated 270
 U7,C33297,B,0,180,0.000,0,0.0000,"SOT-23 drawn rotated 180, same pad arrangement as C8545 (pads 1/2 at +x, 3 at -x; y mirrored as in all EasyEDA fits); JLC's pads sit 1.235 mm out vs our 0.938, both rows symmetric about the origin, so no offset (a 3-pad least-squares fit would wrongly bias tx by 0.1). EasyEDA symbol: 1 IN, 2 OUT, 3 GND"

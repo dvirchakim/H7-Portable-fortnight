@@ -8,13 +8,13 @@ into an ArduPilot-class flight controller**, with Pixhawk-standard ports, microS
   <img src="docs/render_carrier.png" alt="The carrier on its own" width="49%">
 </p>
 
-**Revision R0.3 · fab-ready, not yet built.** DRC and ERC clean, 0 JLCDFM-style dangers, schematic and PCB
+**Revision R0.4 · fab-ready, not yet built.** DRC and ERC clean, 0 JLCDFM-style dangers, schematic and PCB
 agree pad for pad, sockets match Arduino's own Portenta Breakout to 0.000 mm.
 
 ## Highlights
 
 - **Power:** 3–6S LiPo in, TI LMR33630 buck, 5.25 V at 2 A continuous (1.5 A from 3S), 3 A peaks.
-- **Sensors:** TDK ICM-45686 IMU at the board centre, TE MS5607 barometer shielded under the module.
+- **Sensors:** TDK ICM-45686 IMU at the board centre, Bosch BMP581 barometer shielded under the module.
 - **Logging and buses:** 4-bit microSD, DroneCAN (terminated by default), I2C.
 - **Ports:** GPS, TELEM (with flow control), RC, UART, CAN and I2C on JST-GH with Pixhawk DS-009
   pinouts; 4-in-1 ESC on JST-SH 8 in the Betaflight standard order.
@@ -32,7 +32,7 @@ agree pad for pad, sockets match Arduino's own Portenta Breakout to 0.000 mm.
 | Module | Portenta H7 / H7 Lite (STM32H747, M7 480 MHz + M4) on two Hirose DF40HC(3.5), 3.5 mm stack |
 | Input | 3–6S LiPo through solder pads or the ESC harness; SMBJ26A TVS |
 | Outputs | M1–M4 (DShot), S5, S6, WS2812 LED strip, buzzer |
-| Parts | 63 placed parts, 32 BOM lines; about $27 per board in parts at 10 boards (module not included) |
+| Parts | 63 placed parts, 32 BOM lines; about $22 per board in parts at 10 boards (module not included) |
 | Assembly | JLCPCB, both sides; the DF40 sockets are consigned |
 
 ## Architecture
@@ -42,7 +42,7 @@ agree pad for pad, sockets match Arduino's own Portenta Breakout to 0.000 mm.
 | Power | 3-6S VBAT -> TVS -> LMR33630 buck 5.25 V (2 A continuous from 4-6S, ~1.5 A from 3S, 3 A peaks) -> SS34 -> +5V -> H7 VIN | J1-21/32/41/48 |
 | Sensor rail | LP5907 3.3 V low-noise LDO from +5V | — |
 | IMU | TDK ICM-45686, SPI | SPI1 CK/CIPO/COPI (PI1/PC2/PC3), CS PI0, INT GPIO2 (PD4) |
-| Barometer | TE MS5607 (I2C, address 0x76) | I2C0 (PH8/PH7 = I2C3) |
+| Barometer | Bosch BMP581 (I2C, address 0x46) | I2C0 (PH8/PH7 = I2C3) |
 | Magnetometer | LIS3MDL footprint, not fitted — use the GPS module's compass | I2C0 |
 | Motors M1-M4 | 8-pin JST-SH 4-in-1 ESC connector (Betaflight standard order) | M1 PWM5 PK1 TIM1_CH1, M2 PWM4 PJ11 TIM1_CH2, M3 PWM1 PC6 TIM3_CH1, M4 PWM2 PC7 TIM3_CH2: no complementary channels, DMA on both timers, so DShot and bidirectional DShot work on all four |
 | Aux S5, S6, LED strip | pads | LED strip PWM8 PJ10 = TIM8_CH2 (has DMA, so WS2812 works); S6 PWM6 PH15 = TIM8_CH3N (shares TIM8 with the LEDs: second LED string or GPIO while they run); S5 PWM9 PH6 = TIM12_CH1 (servo PWM) |
@@ -80,6 +80,7 @@ run from USB on the bench and USB cannot back-feed the buck.
 
 | Topic | What's there |
 |---|---|
+| [Rev 0.4 changes](docs/rev-0.4/README.md) | Sensor cost pass: BMP581 barometer; IMU options checked |
 | [Rev 0.3 changes](docs/rev-0.3/README.md) | The design review: what was found and fixed, what's left for rev 0.4 |
 | [Rev 0.2 changes](docs/rev-0.2/README.md) | Re-route, buck loop, EMI ring, cost pass, sensor swap |
 | [Verification](docs/verification/README.md) | The "must verify before ordering" checks with results, and the bring-up / production test |

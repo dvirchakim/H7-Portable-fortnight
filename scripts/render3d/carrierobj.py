@@ -12,7 +12,7 @@ def mat(fp):
     if f.startswith('C_'): return 'ceramic'
     if f.startswith('LED'): return 'led'
     if 'JST' in f: return 'nylon'
-    if f.startswith('LGA-8'): return 'metal'            # MS5607: metal cap
+    if 'BMP581' in f: return 'metal'                    # BMP581: metal lid
     return 'ic'
 
 
@@ -31,6 +31,7 @@ def kbox(m, x0, y0, x1, y1, z0, z1):                    # KiCad x / y range
     boxes.append((m, x0, -y1, z0, x1, -y0, z1))
 
 
+kbox('metal', 43.0, 12.0, 45.0, 14.0, 1.6, 2.4)        # U4 BMP581 2 x 2 x 0.8 mm (no KiCad model)
 kbox('nylon', 24.5, 35.25, 34.5, 39.5, 1.6, 4.55)       # J10 JST-SH 8-pin, horizontal (2.95 mm tall)
 kbox('ferrite', 6.1, 19.7, 11.1, 24.7, -3.0, 0.0)       # L1 5 x 5 x 3 mm power inductor, bottom
 kbox('metal', 52.8, 14.0, 65.2, 26.0, -1.42, 0.0)       # J11 microSD socket, bottom

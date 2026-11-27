@@ -21,7 +21,20 @@
      beyond the last pad column and outside the hatched area.
    - `scripts/check_sockets.py` now checks this too. A track planted in the hatched area makes
      it fail.
-3. **Sensor pinouts.** ICM-45686 checked pin by pin against TDK's datasheet. ~~MS5607~~
+3. **Sensor pinouts (rev 0.4).**
+   - **ICM-45686** unchanged (checked against TDK's datasheet in rev 0.2).
+   - **BMP581**, checked 2026-11-27 against Bosch BST-BMP581-DS004 rev 1.13 (pin table 28, land pattern
+     fig. 32): 1 VDDIO, 2 SCK, 3 VSS, 4 SDI, 5 SDO, 6 CSB, 7 INT, 8/9 VSS, 10 VDD. CSB is tied high for I2C
+     and SDO low, which gives address 0x46 ("SDO must not be floating"). INT goes to GND, which Bosch
+     allows while the interrupt is disabled, and ArduPilot's driver never enables it.
+     - The footprint (`fc:Bosch_LGA-10_2x2mm_P0.5mm_BMP581`) uses Bosch's rows 1.525 mm apart, pads
+       25 µm larger than the package on the outer ends, and keeps the 0.2 mm gaps.
+     - Pin 1 and the pad order match JLCPCB's footprint for C5362283, so its rotation correction is 0.
+     - Bosch asks for no tracks or vias under the body: the `U4_KEEPOUT` rule area covers the middle,
+       and every pad leaves outwards.
+     - Bosch asks for no solder mask under the body: the footprint opens the mask there.
+     - C14 (100 nF) sits on the VDD / VDDIO corner.
+   - *Rev 0.3, now replaced:* ~~MS5607~~
    **checked 2026-11-14** against TE's MS5607-02BA03 datasheet (06/2017):
    - Pins match (1 VDD, 2 PS, 3 GND, 4/5 CSB, 6 SDO, 7 SDA, 8 SCLK), and pin 1 sits in the same
      corner as TE's top view.
@@ -135,6 +148,6 @@
 1. Unpowered: no short between VBAT, +5V, +3V3, +3V3_SENS and GND.
 2. 12 V, 100 mA current limit on VBAT: +5V_BUCK about 5.25 V, +5V about 4.9 V (after the SS34),
    +3V3_SENS 3.3 V; note the idle current.
-3. H7 fitted: SWD connects; I2C scan finds the MS5607 at 0x76; IMU WHO_AM_I over SPI; microSD
+3. H7 fitted: SWD connects; I2C scan finds the BMP581 at 0x46 (CHIP_ID 0x50); IMU WHO_AM_I over SPI; microSD
    write/read; CAN loopback with a second node; UART loopbacks; PWM outputs on a scope;
    calibrate VBAT_SENSE; buzzer and both LEDs.

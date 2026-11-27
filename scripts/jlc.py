@@ -32,11 +32,16 @@ LCSC = {                                 # BOM comment -> LCSC part (price / sto
     'SN65HVD230DR': 'C12084',
     # extended (setup fee per unique part)
     'SMBJ26A': 'C123820', 'LMR33630ADDAR': 'C841384', 'LP5907MFX-3.3/NOPB': 'C80670',
-    'ICM-45686': 'C22459454',                # TDK IMU, pin-compatible with ICM-42688-P; JLC assembly difficulty normal
-                                             # (ICM-42688-P C1850418: $21.6, 7 in stock; IIM-42652 C2988404 and
-                                             #  DPS368 C3232508 are flagged 'processing difficult' by JLCPCB)
+    'ICM-45686': 'C22459454',                # TDK IMU, not flagged by JLCPCB. Every cheaper IMU there is flagged
+                                             # 'processing difficult' (checked 2026-11-27: ICM-42670-P C3288646 $1.84
+                                             #  fits the same pads; BMI270, ICM-42607, MPU-6500, IIM-42652 ...);
+                                             #  ICM-42688-P C1850418 is $25, 11 in stock; cheap '42688' = HXY copies
     'REF3125AIDBZR': 'C33297',               # TI 2.5 V series reference for ADC VREF+ (29.9k in stock 2026-11-15)
-    'MS560702BA03-50': 'C97627',             # TE MS5607 barometer (MS5611 C15639 is a drop-in upgrade)
+    'BMP581': 'C5362283',                    # Bosch barometer (R0.4, replaced the TE MS5607 C97627 on cost). JLCPCB
+                                             #  rates every barometer it stocks 'Assembly Difficulty: High' (BMP581,
+                                             #  MS5607, MS5611, BMP388, DPS368, ICP-20100 ... checked 2026-11-27): the
+                                             #  BOM tool leaves the line unticked until you tick it. The BMP581 is
+                                             #  also 'processing difficult' (componentProductType 2), the MS5607 not
     'MDA5030-6R8M': 'C2847478',              # KOHER 6.8 uH (MPS MPL-AL5050-6R8 C3224327 also fits: $1.78, 19 in stock)
     '104031-0811': 'C585350', 'SM04B-GHS-TB': 'C189895', 'SM06B-GHS-TB': 'C133065', 'SM08B-SRSS-TB': 'C160407',
     'DF40HC(3.5)-80DS-0.4V(51)': 'C3641790', # NO STOCK at JLCPCB: pre-order or consign

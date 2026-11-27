@@ -4,7 +4,7 @@ F.Cu    pad/via-trace    DIFFERENT nets                0       18    0.106
 F.Cu    pad/via-pad/via  DIFFERENT nets                0        1    0.130
 F.Cu    pad/via-pad/via  same net                      0        0        -
 B.Cu    trace-trace      DIFFERENT nets                0        3    0.129
-B.Cu    pad/via-trace    DIFFERENT nets                0       11    0.100
+B.Cu    pad/via-trace    DIFFERENT nets                0       12    0.100
 B.Cu    pad/via-pad/via  DIFFERENT nets                0        0        -
 B.Cu    pad/via-pad/via  same net                      0        0        -
 In1.Cu  trace-trace      DIFFERENT nets                0        0        -
@@ -15,7 +15,7 @@ In2.Cu  trace-trace      DIFFERENT nets                0        9    0.129
 In2.Cu  pad/via-trace    DIFFERENT nets                0        0        -
 In2.Cu  pad/via-pad/via  DIFFERENT nets                0        0        -
 In2.Cu  pad/via-pad/via  same net                      0        0        -
-annular ring (vias)                                    0       61    0.125
+annular ring (vias)                                    0       62    0.125
 F silkscreen to pad                                    0        0        -
 F silkscreen to hole                                   0        0        -
 F silkscreen line width                                0        0    0.160
@@ -94,6 +94,7 @@ B.Cu pad/via-trace DIFF gap 0.134: J11-10 GND (54.60,25.74)  |  track SDC_D2 (43
 B.Cu pad/via-trace DIFF gap 0.134: J11-10 GND (54.60,25.74)  |  track SDC_D2 (54.62,24.93)-(56.36,23.19)
 B.Cu pad/via-trace DIFF gap 0.136: U2-4  (25.64,12.05)  |  track SDC_D0 (53.65,11.54)-(24.83,11.54)
 B.Cu pad/via-trace DIFF gap 0.137: C10-2 GND (24.98,15.60)  |  track +3V3_SENS (24.02,15.60)-(25.28,14.34)
+B.Cu pad/via-trace DIFF gap 0.139: via GND (41.86,11.10)  |  track SDC_D0 (53.65,11.54)-(24.83,11.54)
 In2.Cu trace-trace DIFF gap 0.129: track UART0_TX (20.87,14.28)-(13.41,6.83)  |  track UART0_RX (19.41,13.22)-(15.45,9.26)
 In2.Cu trace-trace DIFF gap 0.129: track UART0_TX (20.87,14.28)-(13.41,6.83)  |  track UART0_RX (19.41,19.50)-(19.41,13.22)
 In2.Cu trace-trace DIFF gap 0.129: track UART0_TX (20.87,14.28)-(13.41,6.83)  |  track UART0_RX (15.45,9.26)-(10.88,9.26)

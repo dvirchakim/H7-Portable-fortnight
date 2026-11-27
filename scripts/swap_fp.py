@@ -27,7 +27,7 @@ pos = old.GetPosition() if len(sys.argv) < 6 else pcbnew.VECTOR2I(MM(float(sys.a
 bottom = old.GetLayer() == pcbnew.B_Cu
 old_pads = [(p.GetNetname(), p.GetBoundingBox()) for p in old.Pads()]
 lib, name = fpid.split(':')
-new = pcbnew.FootprintLoad(os.path.join(STD, lib + '.pretty'), name)
+new = pcbnew.FootprintLoad(os.path.join(ROOT, 'fc.pretty') if lib == 'fc' else os.path.join(STD, lib + '.pretty'), name)
 new.SetFPID(pcbnew.LIB_ID(lib, name))
 new.SetReference(ref)
 new.SetValue(part['value'])
